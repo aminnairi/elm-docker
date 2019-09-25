@@ -98,3 +98,37 @@ services:
     volumes:
       - ./my-app:/home/elm/app
 ```
+
+## FAQ
+
+### How do I run Elm commands from this container?
+
+For Docker, just pass your Elm arguments as you would with a local Elm installation.
+
+```bash
+$ docker run aminnairi/elm --version
+0.19.0
+```
+
+For Docker Compose, use the command `docker-compose run` to run your command.
+
+```bash
+$ $EDITOR docker-compose.yaml
+```
+
+```yaml
+version: "3.7"
+
+services:
+  elm:
+    image: aminnairi/elm
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/home/elm/app
+```
+
+```bash
+$ docker-compose run elm --version
+0.19.0
+```
