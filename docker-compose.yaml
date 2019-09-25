@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  elm:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/home/node/elm/app
+    ports:
+      - 8000:8000
