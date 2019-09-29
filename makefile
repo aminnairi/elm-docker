@@ -1,3 +1,5 @@
+.PHONY: start stop restart build
+
 start:
 	docker-compose up --detach --build
 
