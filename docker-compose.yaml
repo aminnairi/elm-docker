@@ -6,6 +6,6 @@ services:
       context: .
       dockerfile: ./Dockerfile
     volumes:
-      - .:/home/node/elm/app
+      - .:/home/elm/app
     ports:
       - 8000:8000
