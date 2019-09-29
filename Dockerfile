@@ -1,5 +1,7 @@
 FROM alpine:latest
 
+LABEL maintainer="https://github.com/aminnairi"
+
 RUN apk add --update nodejs npm
 RUN addgroup -g 1000 -S elm
 RUN adduser -h /home/elm -g "" -s /bin/sh -G elm -S -D -u 1000 elm
