@@ -35,7 +35,7 @@ services:
         user: elm
         working_dir: /home/elm
         tty: true
-        interactive: true
+        stdin_open: true
         entrypoint: elm
         ports:
             - 8000:8000
@@ -44,8 +44,8 @@ services:
 ```
 
 ```console
-$ docker-compose run --rm --tty --interactive elm init
-$ docker-compose run --rm --tty --interactive --service-ports elm reactor
+$ docker-compose run --rm elm init
+$ docker-compose run --rm --service-ports elm reactor
 ```
 
 ## Shell alias
