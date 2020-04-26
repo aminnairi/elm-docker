@@ -1,134 +1,89 @@
 # elm-docker
 
+Docker image for Elm.
+
 ## Requirements
 
-- Terminal emulator (GNU/Linux & UNIX) or command prompt (Windows)
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/) (optional)
 
 ## Usage
 
-### With Docker
+### Docker
 
-```bash
-$ docker run --detach --publish 8000:8000 --volume "$(pwd)":/home/elm/app aminnairi/elm
+```console
+$ docker run --rm --user elm --volume "$PWD":/home/elm aminnairi/elm elm init
+$ docker run --rm --user elm --volume "$PWD":/home/elm --publish 8000:8000 aminnairi/elm elm reactor
 ```
 
-### With Docker Compose
+### Docker Compose
 
-```bash
+```console
+$ mkdir my-elm-app
+$ cd my-elm-app
 $ touch docker-compose.yaml
-$ $EDITOR docker-compose.yaml
 ```
 
 ```yaml
-version: "3.7"
+version: "3"
 
 services:
-  elm:
-    image: aminnairi/elm
-    ports:
-      - 8000:8000
-    volumes:
-      - .:/home/elm/app
+    elm:
+        image: aminnairi/elm
+        user: elm
+        working_dir: /home/elm
+        entrypoint: elm
+        ports:
+            - 8000:8000
+        volumes:
+            - .:/home/elm
 ```
 
-```bash
-$ docker-compose up --detach
+```console
+$ docker-compose run --rm elm init
+$ docker-compose run --rm --service-ports elm reactor
 ```
 
-## Configuration
+## Shell alias
 
-### Port
-
-The default exposed port is the port `8000`. You cannot change it. You can route all request to that port by using the `--port` argument with the `docker run` command, or the `ports` property with the `docker-compose.yaml` configuration file.
-
-#### Examples
-
-##### Docker
-
-```bash
-$ docker run --detach --publish 1234:8000 --volume "$(pwd)":/home/elm/app aminnairi/elm
+```console
+$ alias elm='docker run --rm --user elm --volume "$PWD":/home/elm aminnairi/elm elm'
+$ alias elmreactor='docker run --rm --user elm --volume "$PWD":/home/elm --publish 8000:8000 aminnairi/elm elm reactor'
+$ mkdir my-elm-app
+$ cd my-elm-app
+$ elm init
+$ elmreactor
 ```
 
-##### Docker Compose
+## Installation
 
-```bash
-$ $EDITOR docker-compose.yaml
+```console
+$ docker pull aminnairi/elm
 ```
 
-```yaml
-version: "3.7"
+## Uninstallation
 
-services:
-  elm:
-    image: aminnairi/elm
-    ports:
-      - 1234:8000
-    volumes:
-      - .:/home/elm/app
+```console
+$ docker rmi -f aminnairi/elm
 ```
 
-### Working directory
+## From sources
 
-The working directory inside the container will be located at `/home/elm/app`. Mount all needed files inside that folder using the `--volume` argument with the `docker run` command, or the `volumes` property with the `docker-compose.yaml` configuration file.
+### Requirements
 
-#### Examples
+- [Git](https://git-scm.com/)
+- [Docker](https://www.docker.com/)
 
-##### Docker
+### Installation
 
-```bash
-$ docker run --detach --publish 8000:8000 --volume "$(pwd)/my-app":/home/elm/app aminnairi/elm
+```console
+$ git clone https://github.com/aminnairi/elm-docker.git
+$ cd elm-docker
+$ make install
 ```
 
-##### Docker Compose
+### Uninstallation
 
-```bash
-$ $EDITOR docker-compose.yaml
-```
-
-```yaml
-version: "3.7"
-
-services:
-  elm:
-    image: aminnairi/elm
-    ports:
-      - 8000:8000
-    volumes:
-      - ./my-app:/home/elm/app
-```
-
-## FAQ
-
-### How do I run Elm commands from this container?
-
-For Docker, just pass your Elm arguments as you would with a local Elm installation.
-
-```bash
-$ docker run aminnairi/elm --version
-0.19.0
-```
-
-For Docker Compose, use the command `docker-compose run` to run your command.
-
-```bash
-$ $EDITOR docker-compose.yaml
-```
-
-```yaml
-version: "3.7"
-
-services:
-  elm:
-    image: aminnairi/elm
-    ports:
-      - 8000:8000
-    volumes:
-      - .:/home/elm/app
-```
-
-```bash
-$ docker-compose run elm --version
-0.19.0
+```console
+$ make uninstall
 ```
