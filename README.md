@@ -12,8 +12,8 @@ Docker image for Elm.
 ### Docker
 
 ```console
-$ docker run --rm --user elm --volume "$PWD":/home/elm aminnairi/elm elm init
-$ docker run --rm --user elm --volume "$PWD":/home/elm --publish 8000:8000 aminnairi/elm elm reactor
+$ docker run --rm --tty --interactive --user elm --volume "$PWD":/home/elm aminnairi/elm elm init
+$ docker run --rm --tty --interactive --user elm --volume "$PWD":/home/elm --publish 8000:8000 aminnairi/elm elm reactor
 ```
 
 ### Docker Compose
@@ -32,6 +32,8 @@ services:
         image: aminnairi/elm
         user: elm
         working_dir: /home/elm
+        tty: true
+        interactive: true
         entrypoint: elm
         ports:
             - 8000:8000
@@ -40,15 +42,15 @@ services:
 ```
 
 ```console
-$ docker-compose run --rm elm init
-$ docker-compose run --rm --service-ports elm reactor
+$ docker-compose run --rm --tty --interactive elm init
+$ docker-compose run --rm --tty --interactive --service-ports elm reactor
 ```
 
 ## Shell alias
 
 ```console
-$ alias elm='docker run --rm --user elm --volume "$PWD":/home/elm aminnairi/elm elm'
-$ alias elmreactor='docker run --rm --user elm --volume "$PWD":/home/elm --publish 8000:8000 aminnairi/elm elm reactor'
+$ alias elm='docker run --rm --tty --interactive --user elm --volume "$PWD":/home/elm aminnairi/elm elm'
+$ alias elmreactor='docker run --rm --tty --interactive --user elm --volume "$PWD":/home/elm --publish 8000:8000 aminnairi/elm elm reactor'
 $ mkdir my-elm-app
 $ cd my-elm-app
 $ elm init
@@ -80,6 +82,10 @@ $ docker rmi -f aminnairi/elm
 $ git clone https://github.com/aminnairi/elm-docker.git
 $ cd elm-docker
 $ make install
+$ cd ..
+$ mkdir my-elm-app
+$ cd my-elm-app
+$ docker run --rm --tty --interactive --user elm --volume "$PWD":/home/elm aminnairi/elm elm init
 ```
 
 ### Uninstallation
