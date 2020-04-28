@@ -9,7 +9,7 @@ RUN apk add --update curl ca-certificates \
     && chmod +x elm
 
 # Final stage
-FROM busybox:glibc
+FROM busybox:latest
 
 # Copy the executable
 COPY --from=build /elm /bin/elm
