@@ -4,7 +4,7 @@ FROM alpine:latest AS build
 # Install the necessary dependencies and fetch the compiler from GitHub before
 # uncompressing it and allowing it to be executable
 RUN apk add --update curl ca-certificates \
-    && curl -L -o elm.gz https://github.com/elm/compiler/releases/download/0.19.0/binary-for-linux-64-bit.gz \
+    && curl -L -o elm.gz https://github.com/elm/compiler/releases/download/0.19.1/binary-for-linux-64-bit.gz \
     && gunzip elm.gz \
     && chmod +x elm
 
