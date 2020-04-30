@@ -1,6 +1,6 @@
 # elm
 
-[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/aminnairi/elm)](https://hub.docker.com/r/aminnairi/elm) [![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/aminnairi/elm)](https://hub.docker.com/r/aminnairi/elm) [![Docker Pulls](https://img.shields.io/docker/pulls/aminnairi/elm)](https://hub.docker.com/r/aminnairi/elm)
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/aminnairi/elm)](https://hub.docker.com/r/aminnairi/elm)  [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/aminnairi/elm/latest)](https://hub.docker.com/r/aminnairi/elm) [![Docker Pulls](https://img.shields.io/docker/pulls/aminnairi/elm)](https://hub.docker.com/r/aminnairi/elm)
 
 Docker image for Elm.
 
